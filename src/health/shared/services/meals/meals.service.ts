@@ -20,7 +20,18 @@ export interface Meal {
 export class MealsService {
     meals$ = this.db.list(`meals/${this.uid}`)
         .snapshotChanges().pipe(
-            tap((next) => this.store.set('meals', next))
+            tap((next) => {
+                console.log(next);
+                return this.store.set('meals', next)
+            })
+
+            // map(actions => {
+            //     return actions.map(a => {
+            //         console.log(a.payload.val())
+            //         this.store.set('meals', a.payload.val());
+            //         console.log(this.store.value);
+            //     });
+            // })
         );
 
     constructor(
@@ -35,5 +46,9 @@ export class MealsService {
 
     addMeal(meal: Meal) {
         return this.db.list(`meals/${this.uid}`).push(meal);
+    }
+
+    removeMeal(key: string) {
+        return this.db.list(`meals/${this.uid}`).remove(key);
     }
 }
