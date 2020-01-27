@@ -30,7 +30,7 @@ import { Meal, MealsService } from '../../../shared/services/meals/meals.service
                 </div>
                 <list-item
                     *ngFor="let meal of meals"
-                    [item]="meal.payload"
+                    [item]="meal"
                     (remove)="removeMeal($event)">
                 </list-item>
             </div>

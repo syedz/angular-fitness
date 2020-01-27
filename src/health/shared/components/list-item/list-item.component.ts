@@ -7,7 +7,6 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from 
     template: `
         <div class="list-item">
             <a [routerLink]="getRoute(item)">
-                {{ item | json }}
                 <p class="list-item__name">{{ item.name }}</p>
                 <p class="list-item__ingredients">
                     <span>
@@ -64,6 +63,6 @@ export class ListItemComponent {
     }
 
     getRoute(item: any) {
-        return [`../meals`, item.key];
+        return [`../meals`, item.$key];
     }
 }
