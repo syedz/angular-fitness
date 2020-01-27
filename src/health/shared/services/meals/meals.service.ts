@@ -42,15 +42,16 @@ export class MealsService {
         return this.store.select<Meal[]>('meals')
             .pipe(
                 filter((meal) => !!meal),
-                map(meals => {
-                    console.log(meals);
-                    return meals.find((meal: Meal) => meal.$key === key)
-                })
+                map(meals => meals.find((meal: Meal) => meal.$key === key))
             );
     }
 
     addMeal(meal: Meal) {
         return this.db.list(`meals/${this.uid}`).push(meal);
+    }
+
+    updateMeal(key: string, meal: Meal) {
+        return this.db.object(`meals/${this.uid}/${key}`).update(meal);
     }
 
     removeMeal(key: string) {
