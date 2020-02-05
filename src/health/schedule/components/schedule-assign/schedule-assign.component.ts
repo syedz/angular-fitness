@@ -103,7 +103,7 @@ export class ScheduleAssignComponent implements OnInit {
         });
     }
 
-    cancelAssigned() {
+    cancelAssign() {
         this.cancel.emit();
     }
 }
