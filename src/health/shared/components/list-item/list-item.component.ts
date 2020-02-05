@@ -37,7 +37,7 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from 
             </div>
 
             <button
-                class="confirm"
+                class="trash"
                 type="button"
                 (click)="toggle()">
                 <img src="/img/remove.svg" />
