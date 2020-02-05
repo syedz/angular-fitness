@@ -3,7 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 
 import { Store } from 'store';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { tap, map, switchMap } from 'rxjs/operators';
 
 import { Meal } from '../meals/meals.service';
@@ -30,6 +30,11 @@ export interface ScheduleList {
 export class ScheduleService {
 
     private date$ = new BehaviorSubject(new Date());
+    private section$ = new Subject();
+
+    selected$ = this.section$.pipe(
+        tap((next: any) => this.store.set('selected', next))
+    );
 
     schedule$: Observable<ScheduleItem[]> = this.date$.pipe(
         tap((next: any) => this.store.set('date', next)),
@@ -71,6 +76,10 @@ export class ScheduleService {
 
     updateDate(date: Date) {
         this.date$.next(date);
+    }
+
+    selectSection(event: any) {
+        this.section$.next(event);
     }
 
     private getSchedule(startAt: number, endAt: number) {
